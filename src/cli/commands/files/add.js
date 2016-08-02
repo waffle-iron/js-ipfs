@@ -1,6 +1,5 @@
 'use strict'
 
-const Command = require('ronin').Command
 const utils = require('../../utils')
 const debug = require('debug')
 const log = debug('cli:version')
@@ -35,10 +34,12 @@ function checkPath (inPath, recursive) {
   return inPath
 }
 
-module.exports = Command.extend({
-  desc: 'Add a file to IPFS using the UnixFS data format',
+module.exports = {
+  command: 'add',
 
-  options: {
+  describe: 'Add a file to IPFS using the UnixFS data format',
+
+  builder: {
     recursive: {
       alias: 'r',
       type: 'boolean',
@@ -46,7 +47,7 @@ module.exports = Command.extend({
     }
   },
 
-  run: (recursive, inPath) => {
+  handler: (recursive, inPath) => {
     let rs
 
     inPath = checkPath(inPath, recursive)
@@ -95,4 +96,4 @@ module.exports = Command.extend({
       })
     })
   }
-})
+}

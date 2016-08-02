@@ -1,6 +1,5 @@
 'use strict'
 
-const Command = require('ronin').Command
 const utils = require('../../../utils')
 const bl = require('bl')
 const fs = require('fs')
@@ -24,12 +23,14 @@ function appendData (key, data) {
   })
 }
 
-module.exports = Command.extend({
-  desc: 'Append data to the data segment of a dag node',
+module.exports = {
+  command: 'append-data',
 
-  options: {},
+  describe: 'Append data to the data segment of a dag node',
 
-  run: (key, filePath) => {
+  builder: {},
+
+  handler: (key, filePath) => {
     if (!key) {
       throw new Error("Argument 'root' is required")
     }
@@ -46,4 +47,4 @@ module.exports = Command.extend({
       appendData(key, input)
     }))
   }
-})
+}

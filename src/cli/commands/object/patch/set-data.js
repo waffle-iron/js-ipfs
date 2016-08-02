@@ -1,6 +1,5 @@
 'use strict'
 
-const Command = require('ronin').Command
 const utils = require('../../../utils')
 const bl = require('bl')
 const fs = require('fs')
@@ -24,12 +23,14 @@ function parseAndAddNode (key, data) {
   })
 }
 
-module.exports = Command.extend({
-  desc: 'Set data field of an ipfs object',
+module.exports = {
+  command: 'set-data',
 
-  options: {},
+  describe: 'Set data field of an ipfs object',
 
-  run: (key, filePath) => {
+  builder: {},
+
+  handler: (key, filePath) => {
     if (!key) {
       throw new Error("Argument 'root' is required")
     }
@@ -46,4 +47,4 @@ module.exports = Command.extend({
       parseAndAddNode(key, input)
     }))
   }
-})
+}

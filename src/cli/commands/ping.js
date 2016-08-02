@@ -1,9 +1,10 @@
 'use strict'
 
-const Command = require('ronin').Command
 
-module.exports = Command.extend({
-  desc: '',
+module.exports = {
+  command: 'ping',
 
-  run: () => {}
-})
+  describe: '',
+
+  handler: () => {}
+}

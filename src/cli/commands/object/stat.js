@@ -1,17 +1,18 @@
 'use strict'
 
-const Command = require('ronin').Command
 const utils = require('../../utils')
 const debug = require('debug')
 const log = debug('cli:object')
 log.error = debug('cli:object:error')
 
-module.exports = Command.extend({
-  desc: 'Get stats for the DAG node named by <key>',
+module.exports = {
+  command: 'stat',
 
-  options: {},
+  describe: 'Get stats for the DAG node named by <key>',
 
-  run: (key) => {
+  builder: {},
+
+  handler: (key) => {
     if (!key) {
       throw new Error("Argument 'key' is required")
     }
@@ -34,4 +35,4 @@ module.exports = Command.extend({
       })
     })
   }
-})
+}

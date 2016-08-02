@@ -1,6 +1,5 @@
 'use strict'
 
-const Command = require('ronin').Command
 const debug = require('debug')
 const utils = require('../../utils')
 const log = debug('cli:files')
@@ -70,10 +69,12 @@ function fileHandler (result, dir) {
   }
 }
 
-module.exports = Command.extend({
-  desc: 'Download IPFS objects',
+module.exports = {
+  command: 'get',
 
-  run: (hash, outPath) => {
+  describe: 'Download IPFS objects',
+
+  handler: (hash, outPath) => {
     const dir = checkArgs(hash, outPath)
 
     utils.getIPFS((err, ipfs) => {
@@ -88,4 +89,4 @@ module.exports = Command.extend({
       })
     })
   }
-})
+}

@@ -1,17 +1,18 @@
 'use strict'
 
-const Command = require('ronin').Command
 const utils = require('../../utils')
 const debug = require('debug')
 const log = debug('cli:swarm')
 log.error = debug('cli:swarm:error')
 
-module.exports = Command.extend({
-  desc: 'Open connection to a given address',
+module.exports = {
+  command: 'connect',
 
-  options: {},
+  describe: 'Open connection to a given address',
 
-  run: (address) => {
+  builder: {},
+
+  handler: (address) => {
     if (!address) {
       throw new Error("Argument 'address' is required")
     }
@@ -34,4 +35,4 @@ module.exports = Command.extend({
       })
     })
   }
-})
+}

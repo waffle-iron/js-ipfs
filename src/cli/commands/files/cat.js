@@ -1,17 +1,18 @@
 'use strict'
 
-const Command = require('ronin').Command
 const debug = require('debug')
 const utils = require('../../utils')
 const log = debug('cli:files')
 log.error = debug('cli:files:error')
 
-module.exports = Command.extend({
-  desc: 'Download IPFS objects',
+module.exports = {
+  command: 'cat',
 
-  options: {},
+  describe: 'Download IPFS objects',
 
-  run: (path, options) => {
+  builder: {},
+
+  handler: (path, options) => {
     if (!path) {
       throw new Error("Argument 'path' is required")
     }
@@ -39,4 +40,4 @@ module.exports = Command.extend({
       })
     })
   }
-})
+}

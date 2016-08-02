@@ -1,18 +1,19 @@
 'use strict'
 
-const Command = require('ronin').Command
 const utils = require('../../utils')
 const bs58 = require('bs58')
 const debug = require('debug')
 const log = debug('cli:block')
 log.error = debug('cli:block:error')
 
-module.exports = Command.extend({
-  desc: 'Get a raw IPFS block',
+module.exports = {
+  command: 'get',
 
-  options: {},
+  describe: 'Get a raw IPFS block',
 
-  run: (key) => {
+  builder: {},
+
+  handler: (key) => {
     if (!key) {
       throw new Error("Argument 'key' is required")
     }
@@ -40,4 +41,4 @@ module.exports = Command.extend({
       })
     })
   }
-})
+}

@@ -1,6 +1,5 @@
 'use strict'
 
-const Command = require('ronin').Command
 const spawn = require('child_process').spawn
 const fs = require('fs')
 const temp = require('temp')
@@ -10,10 +9,12 @@ const log = debug('cli:config')
 log.error = debug('cli:config:error')
 const utils = require('../../utils')
 
-module.exports = Command.extend({
-  desc: 'Opens the config file for editing in $EDITOR',
+module.exports = {
+  command: 'edit',
 
-  run: (name) => {
+  describe: 'Opens the config file for editing in $EDITOR',
+
+  handler: (name) => {
     utils.getIPFS((err, ipfs) => {
       if (err) {
         throw err
@@ -111,4 +112,4 @@ module.exports = Command.extend({
       })
     })
   }
-})
+}

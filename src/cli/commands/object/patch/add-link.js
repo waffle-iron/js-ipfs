@@ -1,6 +1,5 @@
 'use strict'
 
-const Command = require('ronin').Command
 const utils = require('../../../utils')
 const debug = require('debug')
 const log = debug('cli:object')
@@ -8,12 +7,14 @@ const mDAG = require('ipfs-merkle-dag')
 const DAGLink = mDAG.DAGLink
 log.error = debug('cli:object:error')
 
-module.exports = Command.extend({
-  desc: 'Add a link to a given object',
+module.exports = {
+  command: 'add-link',
 
-  options: {},
+  describe: 'Add a link to a given object',
 
-  run: (root, name, ref) => {
+  builder: {},
+
+  handler: (root, name, ref) => {
     if (!root) {
       throw new Error("Argument 'root' is required")
     }
@@ -43,4 +44,4 @@ module.exports = Command.extend({
       })
     })
   }
-})
+}

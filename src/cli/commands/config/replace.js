@@ -1,6 +1,5 @@
 'use strict'
 
-const Command = require('ronin').Command
 const debug = require('debug')
 const path = require('path')
 const log = debug('cli:config')
@@ -8,12 +7,14 @@ log.error = debug('cli:config:error')
 const utils = require('../../utils')
 const fs = require('fs')
 
-module.exports = Command.extend({
-  desc: 'Replaces the config with <file>',
+module.exports = {
+  command: 'replace',
 
-  options: {},
+  describe: 'Replaces the config with <file>',
 
-  run: (configPath) => {
+  builder: {},
+
+  handler: (configPath) => {
     utils.getIPFS((err, ipfs) => {
       if (err) {
         throw err
@@ -31,4 +32,4 @@ module.exports = Command.extend({
       })
     })
   }
-})
+}

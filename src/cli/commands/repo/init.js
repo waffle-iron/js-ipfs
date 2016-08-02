@@ -1,11 +1,12 @@
 'use strict'
 
-const Command = require('ronin').Command
 
-module.exports = Command.extend({
-  desc: '',
+module.exports = {
+  command: 'init',
 
-  options: {},
+  describe: '',
 
-  run: function () {}
-})
+  builder: {},
+
+  handler: function () {}
+}

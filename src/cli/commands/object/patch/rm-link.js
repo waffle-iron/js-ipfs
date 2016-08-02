@@ -1,18 +1,19 @@
 'use strict'
 
-const Command = require('ronin').Command
 const DAGLink = require('ipfs-merkle-dag').DAGLink
 const utils = require('../../../utils')
 const debug = require('debug')
 const log = debug('cli:object')
 log.error = debug('cli:object:error')
 
-module.exports = Command.extend({
-  desc: 'Remove a link from an object',
+module.exports = {
+  command: 'rm-link',
 
-  options: {},
+  describe: 'Remove a link from an object',
 
-  run: (root, link) => {
+  builder: {},
+
+  handler: (root, link) => {
     if (!root) {
       throw new Error("Argument 'root' is required")
     }
@@ -36,4 +37,4 @@ module.exports = Command.extend({
       })
     })
   }
-})
+}

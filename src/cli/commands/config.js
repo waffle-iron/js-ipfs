@@ -1,6 +1,5 @@
 'use strict'
 
-const Command = require('ronin').Command
 const debug = require('debug')
 const get = require('lodash.get')
 const set = require('lodash.set')
@@ -8,24 +7,36 @@ const log = debug('cli:config')
 log.error = debug('cli:config:error')
 const utils = require('../utils')
 
-module.exports = Command.extend({
-  desc: 'Get and set IPFS config values',
+module.exports = {
+  command: 'config <key> [value]',
 
-  options: {
-    bool: {
-      type: 'boolean',
-      default: false
-    },
-    json: {
-      type: 'boolean',
-      default: false
-    }
+  describe: 'Get and set IPFS config values',
+
+  options (yargs) {
+    return yargs
+      .commandDir('config')
+      .options({
+        bool: {
+          type: 'boolean',
+          default: false
+        },
+        json: {
+          type: 'boolean',
+          default: false
+        }
+      })
+      .usage('so and so')
   },
 
-  run: (bool, json, key, value) => {
-    if (!key) {
-      throw new Error("argument 'key' is required")
+  handler (argv) {
+    if (argv.help) {
+      return
     }
+
+    const bool = argv.bool
+    const json = argv.json
+    const key = argv.key
+    const value = argv.value
 
     utils.getIPFS((err, ipfs) => {
       if (err) {
@@ -95,4 +106,4 @@ module.exports = Command.extend({
       }
     })
   }
-})
+}

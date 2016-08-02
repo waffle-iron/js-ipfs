@@ -1,6 +1,5 @@
 'use strict'
 
-const Command = require('ronin').Command
 const utils = require('../../utils')
 const bl = require('bl')
 const fs = require('fs')
@@ -24,17 +23,19 @@ function putNode (buf, enc) {
   })
 }
 
-module.exports = Command.extend({
-  desc: 'Stores input as a DAG object, outputs its key',
+module.exports = {
+  command: 'put',
 
-  options: {
+  describe: 'Stores input as a DAG object, outputs its key',
+
+  builder: {
     inputenc: {
       type: 'string',
       default: 'json'
     }
   },
 
-  run: (inputenc, filePath) => {
+  handler: (inputenc, filePath) => {
     if (filePath) {
       return putNode(fs.readFileSync(filePath), inputenc)
     }
@@ -47,4 +48,4 @@ module.exports = Command.extend({
       putNode(input, inputenc)
     }))
   }
-})
+}

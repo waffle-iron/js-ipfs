@@ -1,17 +1,18 @@
 'use strict'
 
-const Command = require('ronin').Command
 const debug = require('debug')
 const log = debug('cli:bootstrap')
 log.error = debug('cli:bootstrap:error')
 const utils = require('../../utils')
 
-module.exports = Command.extend({
-  desc: 'Removes peers from the bootstrap list',
+module.exports = {
+  command: 'rm',
 
-  options: {},
+  describe: 'Removes peers from the bootstrap list',
 
-  run: (multiaddr) => {
+  builder: {},
+
+  handler: (multiaddr) => {
     utils.getIPFS((err, ipfs) => {
       if (err) {
         throw err
@@ -23,4 +24,4 @@ module.exports = Command.extend({
       })
     })
   }
-})
+}
