@@ -8,19 +8,22 @@ const utils = require('../../utils')
 const fs = require('fs')
 
 module.exports = {
-  command: 'replace',
+  command: 'replace <file>',
 
   describe: 'Replaces the config with <file>',
 
   builder: {},
 
-  handler: (configPath) => {
+  handler (argv) {
+    if (argv._handled) return
+    argv._handled = true
+
     utils.getIPFS((err, ipfs) => {
       if (err) {
         throw err
       }
 
-      const filePath = path.resolve(process.cwd(), configPath)
+      const filePath = path.resolve(process.cwd(), argv.file)
 
       const config = utils.isDaemonOn()
         ? filePath : JSON.parse(fs.readFileSync(filePath, 'utf8'))

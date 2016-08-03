@@ -10,9 +10,9 @@ const utils = require('../utils')
 module.exports = {
   command: 'config <key> [value]',
 
-  describe: 'Get and set IPFS config values',
+  description: 'Get and set IPFS config values',
 
-  options (yargs) {
+  builder (yargs) {
     return yargs
       .commandDir('config')
       .options({
@@ -25,18 +25,16 @@ module.exports = {
           default: false
         }
       })
-      .usage('so and so')
   },
 
   handler (argv) {
-    if (argv.help) {
-      return
-    }
+    if (argv._handled) return
+    argv._handled = true
 
     const bool = argv.bool
     const json = argv.json
     const key = argv.key
-    const value = argv.value
+    let value = argv.value
 
     utils.getIPFS((err, ipfs) => {
       if (err) {
@@ -53,7 +51,7 @@ module.exports = {
               throw new Error('failed to read the config')
             }
 
-            console.log(config.Value)
+            console.log(config)
           })
         }
 

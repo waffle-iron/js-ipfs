@@ -6,15 +6,15 @@ const log = debug('cli:swarm')
 log.error = debug('cli:swarm:error')
 
 module.exports = {
-  command: 'connect',
+  command: 'connect <address>',
 
   describe: 'Open connection to a given address',
 
   builder: {},
 
-  handler: (address) => {
-    if (!address) {
-      throw new Error("Argument 'address' is required")
+  handler (argv) {
+    if (!utils.isDaemonOn()) {
+      throw new Error('This command must be run in online mode. Try running \'ipfs daemon\' first.')
     }
 
     utils.getIPFS((err, ipfs) => {
@@ -22,11 +22,7 @@ module.exports = {
         throw err
       }
 
-      if (!utils.isDaemonOn()) {
-        throw new Error('This command must be run in online mode. Try running \'ipfs daemon\' first.')
-      }
-
-      ipfs.swarm.connect(address, (err, res) => {
+      ipfs.swarm.connect(argv.address, (err, res) => {
         if (err) {
           throw err
         }

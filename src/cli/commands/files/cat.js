@@ -6,19 +6,14 @@ const log = debug('cli:files')
 log.error = debug('cli:files:error')
 
 module.exports = {
-  command: 'cat',
+  command: 'cat <ipfs-path>',
 
   describe: 'Download IPFS objects',
 
   builder: {},
 
-  handler: (path, options) => {
-    if (!path) {
-      throw new Error("Argument 'path' is required")
-    }
-    if (!options) {
-      options = {}
-    }
+  handler (argv) {
+    const path = argv.ipfsPath
     utils.getIPFS((err, ipfs) => {
       if (err) {
         throw err

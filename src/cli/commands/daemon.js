@@ -12,7 +12,7 @@ module.exports = {
 
   describe: 'Start a long-running daemon process',
 
-  handler: (name) => {
+  handler () {
     console.log('Initializing daemon...')
     httpAPI = new HttpAPI(process.env.IPFS_PATH)
     httpAPI.start((err) => {

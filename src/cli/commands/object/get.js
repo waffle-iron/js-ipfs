@@ -6,23 +6,19 @@ const log = debug('cli:object')
 log.error = debug('cli:object:error')
 
 module.exports = {
-  command: 'get',
+  command: 'get <key>',
 
   describe: 'Get and serialize the DAG node named by <key>',
 
   builder: {},
 
-  handler: (key) => {
-    if (!key) {
-      throw new Error("Argument 'key' is required")
-    }
-
+  handler (argv) {
     utils.getIPFS((err, ipfs) => {
       if (err) {
         throw err
       }
 
-      ipfs.object.get(key, {enc: 'base58'}, (err, node) => {
+      ipfs.object.get(argv.key, {enc: 'base58'}, (err, node) => {
         if (err) {
           throw err
         }

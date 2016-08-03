@@ -38,15 +38,15 @@ function addBlock (buf) {
 }
 
 module.exports = {
-  command: 'put',
+  command: 'put [data]',
 
   describe: 'Stores input as an IPFS block',
 
   builder: {},
 
-  handler: (filePath) => {
-    if (filePath) {
-      return addBlock(fs.readFileSync(filePath))
+  handler (argv) {
+    if (argv.data) {
+      return addBlock(fs.readFileSync(argv.data))
     }
 
     process.stdin.pipe(bl((err, input) => {

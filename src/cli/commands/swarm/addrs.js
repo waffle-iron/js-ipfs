@@ -15,7 +15,7 @@ module.exports = {
       .commandDir('addrs')
   },
 
-  handler: () => {
+  handler (argv) {
     utils.getIPFS((err, ipfs) => {
       if (err) {
         throw err

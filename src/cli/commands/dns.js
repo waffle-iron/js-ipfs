@@ -1,11 +1,10 @@
 'use strict'
 
-
 module.exports = {
   command: 'dns',
 
   describe: '',
 
-  handler: () => {
+  handler (argv) {
   }
 }

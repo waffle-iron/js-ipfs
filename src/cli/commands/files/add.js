@@ -35,7 +35,7 @@ function checkPath (inPath, recursive) {
 }
 
 module.exports = {
-  command: 'add',
+  command: 'add <file>',
 
   describe: 'Add a file to IPFS using the UnixFS data format',
 
@@ -47,10 +47,10 @@ module.exports = {
     }
   },
 
-  handler: (recursive, inPath) => {
+  handler (argv) {
     let rs
 
-    inPath = checkPath(inPath, recursive)
+    let inPath = checkPath(argv.file, argv.recursive)
 
     glob(path.join(inPath, '/**/*'), (err, res) => {
       if (err) {

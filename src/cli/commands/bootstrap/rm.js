@@ -6,18 +6,18 @@ log.error = debug('cli:bootstrap:error')
 const utils = require('../../utils')
 
 module.exports = {
-  command: 'rm',
+  command: 'rm <peer>',
 
   describe: 'Removes peers from the bootstrap list',
 
   builder: {},
 
-  handler: (multiaddr) => {
+  handler (argv) {
     utils.getIPFS((err, ipfs) => {
       if (err) {
         throw err
       }
-      ipfs.bootstrap.rm(multiaddr, (err, list) => {
+      ipfs.bootstrap.rm(argv.peer, (err, list) => {
         if (err) {
           throw err
         }

@@ -92,7 +92,6 @@
     "promisify-es6": "^1.0.1",
     "read-pkg-up": "^1.0.1",
     "readable-stream": "1.1.13",
-    "ronin": "^0.3.11",
     "run-parallel": "^1.1.6",
     "run-parallel-limit": "^1.0.3",
     "run-series": "^1.1.4",

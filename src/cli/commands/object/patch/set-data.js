@@ -24,19 +24,15 @@ function parseAndAddNode (key, data) {
 }
 
 module.exports = {
-  command: 'set-data',
+  command: 'set-data <root> [data]',
 
   describe: 'Set data field of an ipfs object',
 
   builder: {},
 
-  handler: (key, filePath) => {
-    if (!key) {
-      throw new Error("Argument 'root' is required")
-    }
-
-    if (filePath) {
-      return parseAndAddNode(key, fs.readFileSync(filePath))
+  handler (argv) {
+    if (argv.data) {
+      return parseAndAddNode(argv.root, fs.readFileSync(argv.data))
     }
 
     process.stdin.pipe(bl((err, input) => {
@@ -44,7 +40,7 @@ module.exports = {
         throw err
       }
 
-      parseAndAddNode(key, input)
+      parseAndAddNode(argv.root, input)
     }))
   }
 }

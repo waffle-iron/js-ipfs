@@ -1,6 +1,5 @@
 'use strict'
 
-
 module.exports = {
   command: 'gc',
 
@@ -8,5 +7,6 @@ module.exports = {
 
   builder: {},
 
-  handler: function () {}
+  handler (argv) {
+  }
 }

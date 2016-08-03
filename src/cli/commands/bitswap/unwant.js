@@ -3,17 +3,11 @@
 const utils = require('../../utils')
 
 module.exports = {
-  command: 'unwant',
+  command: 'unwant <key>',
 
   describe: 'Remove a given block from your wantlist.',
 
-  builder: {
-    key: {
-      required: true
-    }
-  },
-
-  handler: (key) => {
+  handler (argv) {
     utils.getIPFS((err, ipfs) => {
       if (err) {
         throw err

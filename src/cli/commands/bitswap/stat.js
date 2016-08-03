@@ -7,10 +7,9 @@ module.exports = {
 
   describe: 'Show some diagnostic information on the bitswap agent.',
 
-  builder: {
-  },
+  builder: {},
 
-  handler: () => {
+  handler () {
     utils.getIPFS((err, ipfs) => {
       if (err) {
         throw err

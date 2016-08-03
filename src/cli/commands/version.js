@@ -26,7 +26,8 @@ module.exports = {
     }
   },
 
-  handler: () => {
+  handler (argv) {
+    // TODO: handle argv.{repo|commit|number}
     utils.getIPFS((err, ipfs) => {
       if (err) {
         throw err

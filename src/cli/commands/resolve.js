@@ -1,10 +1,10 @@
 'use strict'
 
-
 module.exports = {
   command: 'resolve',
 
   describe: '',
 
-  handler: () => {}
+  handler (argv) {
+  }
 }

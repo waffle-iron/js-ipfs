@@ -17,16 +17,17 @@ module.exports = {
     }
   },
 
-  handler: (name) => {
+  handler (argv) {
+    // TODO: handle argv.format
     utils.getIPFS((err, ipfs) => {
       if (err) {
         throw err
       }
-
       ipfs.id((err, id) => {
         if (err) {
           throw err
         }
+
         console.log(JSON.stringify(id, '', 2))
       })
     })

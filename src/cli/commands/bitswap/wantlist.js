@@ -8,9 +8,15 @@ module.exports = {
   describe: 'Print out all blocks currently on the bitswap wantlist for the local peer.',
 
   builder: {
+    peer: {
+      alias: 'p',
+      describe: 'Specify which peer to show wantlist for.',
+      type: 'string'
+    }
   },
 
-  handler: () => {
+  handler (argv) {
+    // TODO: handle argv.peer
     utils.getIPFS((err, ipfs) => {
       if (err) {
         throw err

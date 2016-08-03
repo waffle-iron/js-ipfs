@@ -9,7 +9,7 @@ module.exports = {
 
   builder: {},
 
-  handler: function () {
+  handler (argv) {
     utils.getIPFS((err, ipfs) => {
       if (err) {
         throw err

@@ -24,7 +24,7 @@ function putNode (buf, enc) {
 }
 
 module.exports = {
-  command: 'put',
+  command: 'put [data]',
 
   describe: 'Stores input as a DAG object, outputs its key',
 
@@ -35,9 +35,9 @@ module.exports = {
     }
   },
 
-  handler: (inputenc, filePath) => {
-    if (filePath) {
-      return putNode(fs.readFileSync(filePath), inputenc)
+  handler (argv) {
+    if (argv.data) {
+      return putNode(fs.readFileSync(argv.data), argv.inputenc)
     }
 
     process.stdin.pipe(bl((err, input) => {
@@ -45,7 +45,7 @@ module.exports = {
         throw err
       }
 
-      putNode(input, inputenc)
+      putNode(input, argv.inputenc)
     }))
   }
 }

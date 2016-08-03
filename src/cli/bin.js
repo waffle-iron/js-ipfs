@@ -12,8 +12,10 @@ updateNotifier({
   updateCheckInterval: 1000 * 60 * 60 * 24 * 7 // 1 week
 }).notify()
 
-require('yargs')
+yargs
   .commandDir('commands')
   .demand(1)
   .help()
+  .strict()
+  .completion()
   .argv

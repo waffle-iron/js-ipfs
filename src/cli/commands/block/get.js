@@ -7,25 +7,21 @@ const log = debug('cli:block')
 log.error = debug('cli:block:error')
 
 module.exports = {
-  command: 'get',
+  command: 'get <key>',
 
   describe: 'Get a raw IPFS block',
 
   builder: {},
 
-  handler: (key) => {
-    if (!key) {
-      throw new Error("Argument 'key' is required")
-    }
-
+  handler (argv) {
     utils.getIPFS((err, ipfs) => {
       if (err) {
         throw err
       }
 
       const mh = utils.isDaemonOn()
-        ? key
-        : new Buffer(bs58.decode(key))
+        ? argv.key
+        : new Buffer(bs58.decode(argv.key))
 
       ipfs.block.get(mh, (err, block) => {
         if (err) {

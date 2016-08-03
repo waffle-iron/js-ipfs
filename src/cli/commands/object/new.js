@@ -12,7 +12,7 @@ module.exports = {
 
   builder: {},
 
-  handler: () => {
+  handler (argv) {
     utils.getIPFS((err, ipfs) => {
       if (err) {
         throw err

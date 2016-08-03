@@ -6,23 +6,19 @@ const log = debug('cli:object')
 log.error = debug('cli:object:error')
 
 module.exports = {
-  command: 'data',
+  command: 'data <key>',
 
   describe: 'Outputs the raw bytes in an IPFS object',
 
   builder: {},
 
-  handler: (key) => {
-    if (!key) {
-      throw new Error("Argument 'key' is required")
-    }
-
+  handler (argv) {
     utils.getIPFS((err, ipfs) => {
       if (err) {
         throw err
       }
 
-      ipfs.object.data(key, {enc: 'base58'}, (err, data) => {
+      ipfs.object.data(argv.key, {enc: 'base58'}, (err, data) => {
         if (err) {
           throw err
         }

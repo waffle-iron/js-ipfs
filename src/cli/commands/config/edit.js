@@ -14,7 +14,12 @@ module.exports = {
 
   describe: 'Opens the config file for editing in $EDITOR',
 
-  handler: (name) => {
+  builder: {},
+
+  handler (argv) {
+    if (argv._handled) return
+    argv._handled = true
+
     utils.getIPFS((err, ipfs) => {
       if (err) {
         throw err

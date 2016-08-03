@@ -8,35 +8,25 @@ const DAGLink = mDAG.DAGLink
 log.error = debug('cli:object:error')
 
 module.exports = {
-  command: 'add-link',
+  command: 'add-link <root> <name> <ref>',
 
   describe: 'Add a link to a given object',
 
   builder: {},
 
-  handler: (root, name, ref) => {
-    if (!root) {
-      throw new Error("Argument 'root' is required")
-    }
-    if (!name) {
-      throw new Error("Argument 'name' is required")
-    }
-    if (!ref) {
-      throw new Error("Argument 'ref' is required")
-    }
-
+  handler (argv) {
     utils.getIPFS((err, ipfs) => {
       if (err) {
         throw err
       }
 
-      ipfs.object.get(ref, {enc: 'base58'}).then((linkedObj) => {
+      ipfs.object.get(argv.ref, {enc: 'base58'}).then((linkedObj) => {
         const link = new DAGLink(
-          name,
+          argv.name,
           linkedObj.size(),
           linkedObj.multihash()
         )
-        return ipfs.object.patch.addLink(root, link, {enc: 'base58'})
+        return ipfs.object.patch.addLink(argv.root, link, {enc: 'base58'})
       }).then((node) => {
         console.log(node.toJSON().Hash)
       }).catch((err) => {

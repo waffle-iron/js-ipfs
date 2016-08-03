@@ -22,7 +22,7 @@ module.exports = {
       type: 'boolean',
       describe: 'Overwrite existing config (if it exists)'
     },
-    'empty-repo': {
+    emptyRepo: {
       alias: 'e',
       type: 'boolean',
       describe: "Don't add and pin help files to the local storage"
@@ -41,7 +41,7 @@ module.exports = {
     ipfs.init({
       bits: argv.bits,
       force: argv.force,
-      emptyRepo: argv.empty
+      emptyRepo: argv.emptyRepo
     }, function (err) {
       if (err) {
         console.error(err.toString())
